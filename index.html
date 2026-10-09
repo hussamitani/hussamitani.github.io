@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hussam Itani · Laravel Developer & Game Dev Enthusiast</title>
-  <meta name="description" content="Hussam Itani – Laravel / PHP developer with 10 years of experience, currently at byte5. Passionate about game development, Unity and VR.">
+  <title>Hussam Itani · Laravel Full-Stack Developer & Game Dev Enthusiast</title>
+  <meta name="description" content="Hussam Itani, Laravel full-stack developer and product owner at byte5. PHP since 2015, Laravel since 2016. Game dev and VR at heart.">
   <meta name="author" content="Hussam Itani">
   <meta name="theme-color" content="#0b0d17">
   <link rel="canonical" href="https://hussamitani.github.io/">
@@ -12,8 +12,8 @@
   <!-- Open Graph / social previews -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hussamitani.github.io/">
-  <meta property="og:title" content="Hussam Itani · Laravel Developer">
-  <meta property="og:description" content="10 years of Laravel & PHP. Game dev at heart.">
+  <meta property="og:title" content="Hussam Itani · Laravel Full-Stack Developer">
+  <meta property="og:description" content="PHP since 2015, Laravel since 2016. Game dev at heart.">
   <meta property="og:image" content="https://hussamitani.github.io/assets/img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -31,10 +31,11 @@
     "@type": "Person",
     "name": "Hussam Itani",
     "url": "https://hussamitani.github.io/",
-    "jobTitle": "Laravel Developer",
+    "image": "https://hussamitani.github.io/assets/img/hussam.jpg",
+    "jobTitle": "Laravel Full-Stack Developer & Product Owner",
     "worksFor": { "@type": "Organization", "name": "byte5" },
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Koblenz" },
-    "sameAs": ["https://github.com/hussamitani"]
+    "sameAs": ["https://github.com/hussamitani", "https://www.linkedin.com/in/hussamitani/"]
   }
   </script>
 </head>
@@ -44,225 +45,148 @@
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a href="#top" class="nav__logo" aria-label="Back to top">
+    <a href="#top" class="nav__logo" data-i18n-aria="nav.top" aria-label="Back to top">
       <span class="accent">&lt;</span>HI<span class="accent-2">/&gt;</span>
     </a>
-    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav__links" id="navLinks">
-      <a href="#about">About</a>
-      <a href="#stack">Stack</a>
-      <a href="#journey">Journey</a>
-      <a href="#gamedev">Game Dev</a>
-      <a href="#contact" class="nav__cta">Contact</a>
-    </nav>
+    <div class="nav__right">
+      <nav class="nav__links" id="navLinks">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#journey" data-i18n="nav.journey">Journey</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#stack" data-i18n="nav.stack">Toolbox</a>
+        <a href="#contact" class="nav__cta" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <button class="lang-toggle" id="langToggle" type="button" data-i18n-aria="nav.lang" aria-label="Sprache auf Deutsch umstellen">
+        <span data-lang="en">EN</span><span data-lang="de">DE</span>
+      </button>
+      <button class="nav__toggle" id="navToggle" data-i18n-aria="nav.menu" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="hero__content">
-        <p class="hero__hello reveal">Hi there, I'm</p>
+        <p class="hero__hello reveal" data-i18n="hero.hello">Hi there, I'm</p>
         <h1 class="hero__name reveal" data-glitch="Hussam Itani">Hussam Itani</h1>
         <p class="hero__role reveal">
           <span class="mono">&gt;</span>
           <span id="typed" class="typed"></span><span class="caret">_</span>
         </p>
-        <p class="hero__lead reveal">
-          A decade of crafting robust web applications with <strong class="accent">Laravel</strong> &amp; PHP –
-          and a lifelong passion for building <strong class="accent-2">games</strong>.
+        <p class="hero__lead reveal" data-i18n-html="hero.lead">
+          A decade of building web applications with <strong class="accent">Laravel</strong> &amp; PHP. And a lifelong passion for <strong class="accent-2">games</strong>.
         </p>
         <div class="hero__actions reveal">
-          <a href="#journey" class="btn btn--primary">See my journey</a>
-          <a href="#gamedev" class="btn btn--ghost">Play a little game ▶</a>
+          <a href="#journey" class="btn btn--primary" data-i18n="hero.journey">See my journey</a>
+          <a href="#contact" class="btn btn--ghost" data-i18n="hero.play">Play a little game ▶</a>
         </div>
       </div>
 
-      <div class="terminal reveal" aria-label="Terminal animation">
+      <div class="terminal reveal" aria-hidden="true">
         <div class="terminal__bar">
           <span></span><span></span><span></span>
-          <em>~/hussam — zsh</em>
+          <em>~/hussam · zsh</em>
         </div>
         <pre class="terminal__body" id="terminal"></pre>
       </div>
 
-      <a href="#about" class="scroll-hint" aria-label="Scroll down"><span></span></a>
+      <a href="#about" class="scroll-hint" data-i18n-aria="hero.scroll" aria-label="Scroll down"><span></span></a>
     </section>
 
     <!-- ============ ABOUT ============ -->
     <section class="section" id="about">
-      <h2 class="section__title reveal"><span class="mono accent">01.</span> About me</h2>
+      <h2 class="section__title reveal" data-i18n="about.title">About me</h2>
       <div class="about">
         <div class="about__photo reveal">
           <div class="photo-frame">
-            <!-- Drop your picture at assets/img/profile.jpg -->
-            <img src="assets/img/profile.jpg" alt="Portrait of Hussam Itani" loading="lazy" onerror="this.remove()">
+            <img src="assets/img/hussam.jpg" alt="Portrait of Hussam Itani" data-i18n-alt="about.photo" width="800" height="1000" loading="lazy" onerror="this.remove()">
             <span class="photo-frame__initials">HI</span>
           </div>
         </div>
         <div class="about__text reveal">
-          <p>
-            I'm a <strong>Laravel professional</strong> with <strong>10 years</strong> of experience building
-            APIs, platforms and products that real people rely on every day – from EdTech at scale to
-            public-sector digital services.
-          </p>
-          <p>
-            I studied <strong>Computervisualistik</strong> (Computer Visualistics) at the
-            <strong>University of Koblenz</strong>, where I fell in love with computer graphics,
-            3D and interactive worlds. My bachelor thesis? A <strong>VR snowboarding game</strong> built in Unity.
-          </p>
-          <p>
-            Today I write clean, well-tested Laravel code at <strong class="accent">byte5</strong> –
-            and in my free time I still enjoy tinkering with game engines.
-          </p>
+          <p data-i18n-html="about.p1"></p>
+          <p data-i18n-html="about.p2"></p>
+          <p data-i18n-html="about.p3"></p>
 
           <ul class="stats">
-            <li><span class="stats__num" data-count="10">0</span><span class="stats__plus">+</span><span class="stats__label">years with PHP &amp; Laravel</span></li>
-            <li><span class="stats__num" data-count="4">0</span><span class="stats__label">companies shaped</span></li>
-            <li><span class="stats__num" data-count="1">0</span><span class="stats__label">VR snowboarding game</span></li>
-            <li><span class="stats__num" data-count="999">0</span><span class="stats__plus">+</span><span class="stats__label">cups of coffee</span></li>
+            <li><span class="stats__num" data-count="10">0</span><span class="stats__plus">+</span><span class="stats__label" data-i18n="about.stats.years">years with PHP &amp; Laravel</span></li>
+            <li><span class="stats__num" data-count="4">0</span><span class="stats__label" data-i18n="about.stats.oss">open source projects</span></li>
+            <li><span class="stats__num" data-count="999">0</span><span class="stats__plus">+</span><span class="stats__label" data-i18n="about.stats.games">games &amp; projects</span></li>
+            <li><span class="stats__num">∞</span><span class="stats__label" data-i18n="about.stats.coffee">cups of coffee</span></li>
           </ul>
         </div>
       </div>
     </section>
 
+    <!-- ============ JOURNEY ============ -->
+    <section class="section" id="journey">
+      <h2 class="section__title reveal" data-i18n="journey.title">The journey</h2>
+      <p class="section__intro reveal" data-i18n="journey.intro">Every save point so far. Newest first.</p>
+      <ol class="timeline" id="timeline"><!-- filled by js --></ol>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <h2 class="section__title reveal" data-i18n="projects.title">Projects</h2>
+      <p class="section__intro reveal" data-i18n="projects.intro">Things I build after hours. Hover or tap a card to flip it.</p>
+      <div class="projects" id="projectGrid"><!-- filled by js --></div>
+    </section>
+
     <!-- ============ STACK ============ -->
     <section class="section" id="stack">
-      <h2 class="section__title reveal"><span class="mono accent">02.</span> My toolbox</h2>
-      <p class="section__intro reveal">Laravel is home – but a good craftsman knows the whole workshop.</p>
+      <h2 class="section__title reveal" data-i18n="stack.title">My toolbox</h2>
+      <p class="section__intro reveal" data-i18n="stack.intro">Laravel is home. But a good craftsman knows the whole workshop.</p>
 
       <div class="stack-tabs reveal" role="tablist">
-        <button class="stack-tab is-active" data-filter="all" role="tab">All</button>
-        <button class="stack-tab" data-filter="backend" role="tab">Backend</button>
-        <button class="stack-tab" data-filter="frontend" role="tab">Frontend</button>
-        <button class="stack-tab" data-filter="devops" role="tab">DevOps &amp; Data</button>
-        <button class="stack-tab" data-filter="gamedev" role="tab">Game Dev</button>
+        <button class="stack-tab is-active" data-filter="all" role="tab" data-i18n="stack.tabs.all">All</button>
+        <button class="stack-tab" data-filter="backend" role="tab" data-i18n="stack.tabs.backend">Backend</button>
+        <button class="stack-tab" data-filter="frontend" role="tab" data-i18n="stack.tabs.frontend">Frontend</button>
+        <button class="stack-tab" data-filter="devops" role="tab" data-i18n="stack.tabs.devops">DevOps &amp; Data</button>
+        <button class="stack-tab" data-filter="gamedev" role="tab" data-i18n="stack.tabs.gamedev">Game Dev</button>
       </div>
 
       <div class="stack-grid" id="stackGrid"><!-- filled by js --></div>
     </section>
 
-    <!-- ============ JOURNEY ============ -->
-    <section class="section" id="journey">
-      <h2 class="section__title reveal"><span class="mono accent">03.</span> The journey</h2>
-      <p class="section__intro reveal">Every save point along the way.</p>
-
-      <ol class="timeline">
-        <li class="timeline__item reveal">
-          <div class="timeline__dot"></div>
-          <div class="card">
-            <span class="card__meta">2014 – 2020 · Education</span>
-            <h3>University of Koblenz</h3>
-            <p class="card__role">B.Sc. Computervisualistik</p>
-            <p>Computer graphics, image processing, 3D &amp; interaction. Thesis: a VR snowboarding game built with Unity.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <div class="timeline__dot"></div>
-          <div class="card">
-            <span class="card__meta">Level 1 · Work</span>
-            <h3>venITure</h3>
-            <p class="card__role">PHP / Laravel Developer</p>
-            <p>Where it all began – shipping my first production Laravel applications and learning the craft.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <div class="timeline__dot"></div>
-          <div class="card">
-            <span class="card__meta">Level 2 · Work</span>
-            <h3>Sdui</h3>
-            <p class="card__role">Laravel Developer</p>
-            <p>Building EdTech at scale – an app connecting schools, teachers, students and parents.</p>
-          </div>
-        </li>
-        <li class="timeline__item reveal">
-          <div class="timeline__dot"></div>
-          <div class="card">
-            <span class="card__meta">Level 3 · Work</span>
-            <h3>publicplan</h3>
-            <p class="card__role">Laravel Developer</p>
-            <p>Digitalising public services – reliable, accessible software for the public sector.</p>
-          </div>
-        </li>
-        <li class="timeline__item timeline__item--current reveal">
-          <div class="timeline__dot"></div>
-          <div class="card">
-            <span class="card__meta"><span class="pulse"></span> Current level · Today</span>
-            <h3>byte5</h3>
-            <p class="card__role">Laravel Professional</p>
-            <p>Designing and building Laravel applications for clients, with a focus on clean architecture and quality.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ============ GAME DEV ============ -->
-    <section class="section" id="gamedev">
-      <h2 class="section__title reveal"><span class="mono accent">04.</span> Game dev corner</h2>
-      <div class="gamedev">
-        <div class="gamedev__text reveal">
-          <h3>VR Snowboarding <span class="tag">Bachelor thesis</span></h3>
-          <p>
-            For my bachelor thesis I built a <strong>virtual reality snowboarding game</strong> in
-            <strong>Unity</strong> – carving down mountains with your own body as the controller.
-            Physics, terrain, immersion and fighting motion sickness: it combined everything I loved
-            about computer visualistics.
-          </p>
-          <ul class="chips">
-            <li>Unity</li><li>C#</li><li>Virtual Reality</li><li>Physics</li><li>3D Modelling</li>
-          </ul>
-          <p class="muted">
-            Here's a tiny 2D tribute to it. Use <kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd> or tap left/right side to steer. Dodge the trees!
-          </p>
-
-          <!-- Gallery: drop screenshots at assets/img/vr-1.jpg, vr-2.jpg, vr-3.jpg -->
-          <div class="gallery">
-            <figure><img src="assets/img/vr-1.jpg" alt="VR snowboarding screenshot 1" loading="lazy" onerror="this.parentElement.classList.add('is-empty')"></figure>
-            <figure><img src="assets/img/vr-2.jpg" alt="VR snowboarding screenshot 2" loading="lazy" onerror="this.parentElement.classList.add('is-empty')"></figure>
-            <figure><img src="assets/img/vr-3.jpg" alt="VR snowboarding screenshot 3" loading="lazy" onerror="this.parentElement.classList.add('is-empty')"></figure>
-          </div>
-        </div>
-
-        <div class="game reveal">
-          <canvas id="game" width="360" height="480" aria-label="Snowboarding mini game"></canvas>
-          <div class="game__hud">
-            <span>Score: <b id="score">0</b></span>
-            <span>Best: <b id="best">0</b></span>
-          </div>
-          <div class="game__overlay" id="gameOverlay">
-            <p class="game__title">⛷ Shred Koblenz</p>
-            <p id="gameMsg">Press <kbd>Space</kbd> or tap to start</p>
-            <button class="btn btn--primary" id="gameStart">Start</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
+    <!-- ============ CONTACT + MINI GAME ============ -->
     <section class="section contact" id="contact">
-      <h2 class="section__title reveal"><span class="mono accent">05.</span> Let's build something</h2>
-      <p class="contact__lead reveal">
-        Need a Laravel expert, a sparring partner for architecture, or just want to talk games?
-        My inbox is always open.
-      </p>
-      <div class="contact__links reveal">
-        <!-- TODO: replace with your preferred e-mail address -->
-        <a href="mailto:hello@example.com" class="btn btn--primary btn--big">Say hello 👋</a>
+      <div class="contact__text">
+        <h2 class="section__title reveal" data-i18n="contact.title">Let's build something</h2>
+        <p class="contact__lead reveal" data-i18n="contact.lead"></p>
+        <div class="contact__links reveal">
+          <a href="https://www.linkedin.com/in/hussamitani/" target="_blank" rel="noopener" class="btn btn--primary btn--big">
+            <i class="devicon-linkedin-plain" aria-hidden="true"></i><span data-i18n="contact.linkedin">Message me on LinkedIn</span>
+          </a>
+          <a href="https://github.com/hussamitani" target="_blank" rel="noopener" class="btn btn--ghost btn--big">
+            <i class="devicon-github-original" aria-hidden="true"></i><span data-i18n="contact.github">GitHub</span>
+          </a>
+        </div>
+        <p class="contact__game-intro muted reveal" data-i18n-html="contact.gameIntro"></p>
       </div>
-      <ul class="socials reveal">
-        <li><a href="https://github.com/hussamitani" target="_blank" rel="noopener" aria-label="GitHub"><i class="devicon-github-original"></i></a></li>
-        <!-- TODO: replace with your LinkedIn profile URL -->
-        <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="devicon-linkedin-plain"></i></a></li>
-      </ul>
+
+      <div class="game reveal">
+        <canvas id="game" width="360" height="480" data-i18n-aria="game.label" aria-label="Snowboarding mini game"></canvas>
+        <div class="game__hud">
+          <span><span data-i18n="game.score">Score</span>: <b id="score">0</b></span>
+          <span><span data-i18n="game.best">Best</span>: <b id="best">0</b></span>
+        </div>
+        <div class="game__overlay" id="gameOverlay">
+          <p class="game__title">⛷ Shred Koblenz</p>
+          <p id="gameMsg">Press <kbd>Space</kbd> or tap to start</p>
+          <button class="btn btn--primary" id="gameStart">Start</button>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Built with plain HTML, CSS &amp; JS · Hosted on GitHub Pages · © <span id="year"></span> Hussam Itani</p>
-    <p class="footer__egg muted">psst… try the Konami code ↑↑↓↓←→←→BA</p>
+    <p><span data-i18n="footer.built">Plain HTML, CSS &amp; JS. No framework, no build step.</span> · © <span id="year"></span> Hussam Itani</p>
+    <p class="footer__egg muted" data-i18n="footer.egg">psst… try the Konami code ↑↑↓↓←→←→BA</p>
   </footer>
 
+  <script src="js/i18n.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

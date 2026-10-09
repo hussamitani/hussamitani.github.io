@@ -51,6 +51,35 @@
     { name: 'Godot',          icon: 'devicon-godot-plain',       cat: 'gamedev' },
   ];
 
+  /* ---------- Journey, newest first ----------
+     id: key in js/i18n.js (journey.jobs.<id>), level: null = current, 0 = tutorial */
+  const JOURNEY = [
+    { id: 'byte5',      name: 'byte5',          when: '01/2026',             level: null },
+    { id: 'publicplan', name: 'publicplan',     when: '08/2023 – 12/2025',   level: 5 },
+    { id: 'sdui',       name: 'Sdui',           when: '02/2021 – 08/2023',   level: 4 },
+    { id: 'venture',    name: 'venITure',       when: '01/2020 – 02/2021',   level: 3 },
+    { id: 'freelance',  name: null,             when: '2017 – 2020',         level: 2 },
+    { id: 'ptc',        name: 'PTC GPS GmbH',   when: '2015 – 2017',         level: 1 },
+    { id: 'uni',        name: null,             when: '2014 – 2019',         level: 0 },
+  ];
+
+  /* ---------- Projects (flip cards) ----------
+     id: key in js/i18n.js (projects.items.<id>), url: GitHub link or null = "coming soon",
+     pdf: download link shown instead of GitHub. A "more coming soon" card is appended automatically */
+  const PROJECTS = [
+    { id: 'thesis',     icon: '🏂', chips: ['Unity', 'C#', 'VR', 'Wii Balance Board'],
+      pdf: 'assets/docs/Hussam-Itani_Bachelorarbeit_VR-Controller-Immersion.pdf' },
+    // not public yet: https://github.com/laradriel/split
+    { id: 'split',      icon: '🎫', chips: ['Laravel', 'FilamentPHP'],          url: null },
+    { id: 'pisa',       icon: '📦', chips: ['Laravel', 'FilamentPHP', 'EAV', 'API'], url: 'https://github.com/laradriel/pisa' },
+    { id: 'structured', icon: '🧩', chips: ['Claude Code', 'Skill', 'Markdown'], url: 'https://github.com/hitani5/structured-output' },
+    // not public yet: https://github.com/byte5digital/package-scanner
+    { id: 'scanner',    icon: '🔎', chips: ['GitHub API', 'Packagist', 'npm', 'PyPI'], url: null },
+  ];
+
+  const t = (key) => window.I18N.t(key);
+  const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
   /* ---------- Floating diagonal icons ---------- */
   function initFloaters() {
     const box = $('#floaters');
@@ -110,20 +139,17 @@
   function initTyped() {
     const el = $('#typed');
     if (!el) return;
-    const roles = [
-      'Laravel Professional @ byte5',
-      'PHP Developer for 10+ years',
-      'php artisan make:awesome',
-      'Clean Code & Architecture Nerd',
-      'Unity & VR Game Developer',
-      'Computervisualistik Graduate',
-    ];
+    let roles = t('hero.roles');
+    window.I18N.onChange(() => {
+      roles = t('hero.roles');
+      if (reducedMotion) el.textContent = roles[0];
+    });
     if (reducedMotion) { el.textContent = roles[0]; return; }
     let r = 0, c = 0, deleting = false;
     const tick = () => {
-      const word = roles[r];
+      const word = roles[r % roles.length];
       el.textContent = word.slice(0, c);
-      if (!deleting && c === word.length) { deleting = true; return setTimeout(tick, 1800); }
+      if (!deleting && c >= word.length) { deleting = true; return setTimeout(tick, 1800); }
       if (deleting && c === 0) { deleting = false; r = (r + 1) % roles.length; }
       c += deleting ? -1 : 1;
       setTimeout(tick, deleting ? 35 : 70);
@@ -135,31 +161,38 @@
   function initTerminal() {
     const term = $('#terminal');
     if (!term) return;
-    const lines = [
-      ['<span class="t-prompt">➜</span> php artisan about --only=developer', 600],
-      ['', 200],
-      ['  <span class="t-key">Name</span> ............... <span class="t-str">Hussam Itani</span>', 120],
-      ['  <span class="t-key">Role</span> ............... <span class="t-str">Laravel Professional</span>', 120],
-      ['  <span class="t-key">Company</span> ............ <span class="t-str">byte5</span>', 120],
-      ['  <span class="t-key">Experience</span> ......... <span class="t-str">10+ years</span>', 120],
-      ['  <span class="t-key">Studied</span> ............ <span class="t-str">Computervisualistik</span>', 120],
-      ['  <span class="t-key">Hobby</span> .............. <span class="t-str">Game Dev (Unity, VR)</span>', 120],
-      ['', 300],
-      ['<span class="t-prompt">➜</span> php artisan test', 600],
-      ['', 200],
-      ['  <span class="t-ok">✓</span> writes clean code', 150],
-      ['  <span class="t-ok">✓</span> ships on time', 150],
-      ['  <span class="t-ok">✓</span> loves games', 150],
-      ['', 100],
-      ['  Tests:  <span class="t-ok">3 passed</span>  <span class="t-red">♥</span>', 0],
-    ];
-    if (reducedMotion) { term.innerHTML = lines.map(l => l[0]).join('\n'); return; }
+    const buildLines = () => {
+      const tests = t('hero.terminal.tests');
+      return [
+        ['<span class="t-prompt">➜</span> php artisan about --only=developer', 600],
+        ['', 200],
+        ['  <span class="t-key">Name</span> ............... <span class="t-str">Hussam Itani</span>', 120],
+        [`  <span class="t-key">Role</span> ............... <span class="t-str">${t('hero.terminal.role')}</span>`, 120],
+        ['  <span class="t-key">Company</span> ............ <span class="t-str">byte5</span>', 120],
+        [`  <span class="t-key">Experience</span> ......... <span class="t-str">${t('hero.terminal.experience')}</span>`, 120],
+        ['  <span class="t-key">Studied</span> ............ <span class="t-str">Computervisualistik</span>', 120],
+        [`  <span class="t-key">Hobby</span> .............. <span class="t-str">${t('hero.terminal.hobby')}</span>`, 120],
+        ['', 300],
+        ['<span class="t-prompt">➜</span> php artisan test', 600],
+        ['', 200],
+        ...tests.map(test => [`  <span class="t-ok">✓</span> ${test}`, 150]),
+        ['', 100],
+        [`  Tests:  <span class="t-ok">${t('hero.terminal.passed')}</span>  <span class="t-red">♥</span>`, 0],
+      ];
+    };
+    let lines = buildLines();
+    const renderAll = () => { term.innerHTML = lines.map(l => l[0]).join('\n'); };
+
+    // switching language mid-animation stops it and shows the full output
+    let stopped = false;
+    window.I18N.onChange(() => { lines = buildLines(); stopped = true; renderAll(); });
+    if (reducedMotion) { renderAll(); return; }
 
     const prefix = '<span class="t-prompt">➜</span> ';
     let done = '';
     let i = 0;
     const next = () => {
-      if (i >= lines.length) return;
+      if (stopped || i >= lines.length) return;
       const [html, pause] = lines[i++];
       if (!html.startsWith(prefix)) {         // output lines appear instantly
         done += html + '\n';
@@ -169,6 +202,7 @@
       const cmd = html.slice(prefix.length);  // commands are typed char by char
       let c = 0;
       const typeCmd = () => {
+        if (stopped) return;
         term.innerHTML = done + prefix + cmd.slice(0, c) + '<span class="caret">▌</span>';
         if (c++ < cmd.length) return setTimeout(typeCmd, 45);
         done += html + '\n';
@@ -178,6 +212,85 @@
       typeCmd();
     };
     setTimeout(next, 900);
+  }
+
+  /* ---------- Journey timeline ---------- */
+  function renderJourney() {
+    const list = $('#timeline');
+    if (!list) return;
+    list.innerHTML = JOURNEY.map(job => {
+      const copy = t(`journey.jobs.${job.id}`);
+      const current = job.level === null;
+      const meta = current
+        ? `<span class="pulse"></span> ${t('journey.current')} · ${t('journey.since')} ${job.when}`
+        : `${job.level === 0 ? t('journey.tutorial') : `${t('journey.level')} ${job.level}`} · ${job.when}`;
+      return `
+        <li class="timeline__item${current ? ' timeline__item--current' : ''} reveal">
+          <div class="timeline__dot"></div>
+          <div class="card">
+            <span class="card__meta">${meta}</span>
+            <h3>${esc(job.name || copy.name)}</h3>
+            <p class="card__role">${esc(copy.role)}</p>
+            <ul class="card__points">${copy.points.map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+          </div>
+        </li>`;
+    }).join('');
+  }
+
+  /* ---------- Project flip cards ---------- */
+  function renderProjects() {
+    const grid = $('#projectGrid');
+    if (!grid) return;
+    grid.innerHTML = PROJECTS.map(p => {
+      const copy = t(`projects.items.${p.id}`);
+      let action;
+      if (p.pdf) {
+        action = `<a class="btn btn--primary btn--small" href="${p.pdf}" download>${esc(copy.link)} ↓</a>`;
+      } else if (p.url) {
+        action = `<a class="btn btn--primary btn--small" href="${p.url}" target="_blank" rel="noopener"><i class="devicon-github-original" aria-hidden="true"></i>${esc(t('projects.github'))}</a>`;
+      } else {
+        action = `<span class="project__soon"><i class="devicon-github-original" aria-hidden="true"></i>${esc(t('projects.soon'))}</span>`;
+      }
+      return `
+        <article class="project reveal" tabindex="0" aria-label="${esc(copy.title)}">
+          <div class="project__inner">
+            <div class="project__face project__front">
+              <span class="project__tag">${esc(copy.tag)}</span>
+              <span class="project__icon" aria-hidden="true">${p.icon}</span>
+              <h3>${esc(copy.title)}</h3>
+              <p class="project__tagline">${esc(copy.tagline)}</p>
+              <ul class="chips">${p.chips.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+              <span class="project__flip" aria-hidden="true">↻ ${esc(t('projects.flip'))}</span>
+            </div>
+            <div class="project__face project__back">
+              <h3>${esc(copy.title)}</h3>
+              <ul class="project__points">${copy.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>
+              ${action}
+            </div>
+          </div>
+        </article>`;
+    }).join('') + `
+      <div class="project-more reveal">
+        <span class="project__icon" aria-hidden="true">🚧</span>
+        <p>${esc(t('projects.more'))}</p>
+      </div>`;
+  }
+
+  function initProjects() {
+    const grid = $('#projectGrid');
+    if (!grid) return;
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    const flipOnly = (card) => $$('.project', grid).forEach(c => c.classList.toggle('is-flipped', c === card && !c.classList.contains('is-flipped')));
+
+    // touch: tap flips the card, tapping elsewhere or another card flips it back
+    document.addEventListener('click', (e) => {
+      if (canHover) return;
+      const card = e.target.closest('.project');
+      if (card && e.target.closest('a') && card.classList.contains('is-flipped')) return; // let links on the back work
+      if (card) e.preventDefault();
+      flipOnly(card);
+    });
+    // keyboard focus flips via CSS (:focus-visible)
   }
 
   /* ---------- Stack grid + filter ---------- */
@@ -300,6 +413,15 @@
     const keys = { left: false, right: false };
     let state, running = false, last = 0;
 
+    // overlay text depends on language and on whether a run has finished
+    let lastScore = null;
+    const renderOverlay = () => {
+      msg.innerHTML = lastScore === null ? t('game.hint') : t('game.over').replace('{score}', lastScore);
+      startBtn.textContent = t(lastScore === null ? 'game.start' : 'game.retry');
+    };
+    renderOverlay();
+    window.I18N.onChange(renderOverlay);
+
     const reset = () => {
       state = {
         x: W / 2, vx: 0,
@@ -412,10 +534,10 @@
         bestEl.textContent = best;
         try { localStorage.setItem('shred-best', String(best)); } catch (_) {}
       }
-      const quips = ['Wipeout! 🌲', 'Tree: 1 – You: 0', 'Should\'ve used VR 🥽', 'Bailed! Try again', 'Nice run! 🏂'];
+      const quips = t('game.quips');
       $('.game__title', overlay).textContent = quips[Math.floor(Math.random() * quips.length)];
-      msg.innerHTML = `Score: <b>${score}</b> · Press <kbd>Space</kbd> or tap`;
-      startBtn.textContent = 'Retry';
+      lastScore = score;
+      renderOverlay();
       overlay.classList.remove('is-hidden');
     };
 
@@ -474,14 +596,32 @@
     'color:#ff2d20;font-size:20px;font-weight:bold', 'color:#8b90ab'
   );
 
+  /* ---------- Language toggle ---------- */
+  function initLangToggle() {
+    const btn = $('#langToggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => window.I18N.set(window.I18N.lang === 'de' ? 'en' : 'de'));
+    // re-render generated sections; they were already scrolled into view, so skip the reveal
+    window.I18N.onChange(() => {
+      renderJourney();
+      renderProjects();
+      $$('#timeline .reveal, #projectGrid .reveal').forEach(el => el.classList.add('is-visible'));
+    });
+  }
+
   /* ---------- Boot ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     $('#year').textContent = new Date().getFullYear();
+    window.I18N.apply();
+    renderJourney();
+    renderProjects();
+    initLangToggle();
     initFloaters();
     initCursorGlow();
     initTyped();
     initTerminal();
     initStack();
+    initProjects();
     initReveal();
     initNav();
     initGame();
